@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ChatGPT Demo</title>
+    <style>
+        .interaction {
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>ChatGPT Demo</h1>
+    <form action="/" method="post">
+        <label for="userInput">Your question:</label><br>
+        <input type="text" id="userInput" name="userInput"><br><br>
+        <input type="submit" value="Ask me">
+    </form>
+    <br>
+    <h2>Response:</h2>
+    {{ if .response }}
+        <textarea rows="10" cols="50" readonly>{{.response}}</textarea>
+    {{ else }}
+        <p>{{.notification}}</p>
+    {{ end }}
+
+    <h2>History:</h2>
+    {{ range .history }}
+        <div class="interaction">
+            <p><strong>Time:</strong> {{ .Timestamp }}</p>
+            <p><strong>Question:</strong> {{ .Question }}</p>
+            <p><strong>Response:</strong> {{ .Response }}</p>
+        </div>
+    {{ else }}
+        <p>No interaction history yet.</p>
+    {{ end }}
+</body>
+</html>
